@@ -3,6 +3,8 @@
 /node_modules
 /build
 
+#dynamodb local storage
+/docker
 # Logs
 logs
 *.log
