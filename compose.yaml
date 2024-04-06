@@ -1,18 +1,18 @@
 version: '3.8'
 
 services:
-  nestjs:
-    build: ./
-    image: nestjs-dynamo-app
-    container_name: 'nestjs-app'
-    ports:
-      - '3000:3000'
-    environment:
-      - ENDPOINT_URL=http://dynamodb-local:8000
-    depends_on:
-      - dynamodb-local
-    networks:
-      - nestjs_network
+  # nestjs:
+  #   build: ./
+  #   image: nestjs-dynamo-app
+  #   container_name: 'nestjs-app'
+  #   ports:
+  #     - '3000:3000'
+  #   environment:
+  #     - ENDPOINT_URL=http://dynamodb-local:8000
+  #   depends_on:
+  #     - dynamodb-local
+  #   networks:
+  #     - nestjs_network
   
   dynamodb-local:
     image: amazon/dynamodb-local:latest
