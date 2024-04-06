@@ -23,7 +23,7 @@ export class AppModule {
         secretAccessKey: 'test',
       },
       region: 'local',
-      endpoint: 'http://localhost:8001',
+      endpoint: process.env.ENDPOINT_URL,
     });
     dynamoose.aws.ddb.set(ddb);
   }
