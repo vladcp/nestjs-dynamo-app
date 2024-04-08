@@ -4,11 +4,15 @@ import { AppService } from './app.service';
 import { BookModule } from './book/book.module';
 import { DynamooseModule } from 'nestjs-dynamoose';
 import * as dynamoose from 'dynamoose';
+import { ConfigModule, ConfigService } from '@nestjs/config';
 
 @Module({
   imports: [
     DynamooseModule.forRoot({
       logger: true,
+    }),
+    ConfigModule.forRoot({
+      isGlobal: true,
     }),
     BookModule,
   ],
@@ -16,14 +20,14 @@ import * as dynamoose from 'dynamoose';
   providers: [AppService],
 })
 export class AppModule {
-  constructor() {
+  constructor(config: ConfigService) {
     const ddb = new dynamoose.aws.ddb.DynamoDB({
       credentials: {
-        accessKeyId: 'test',
-        secretAccessKey: 'test',
+        accessKeyId: config.getOrThrow('ACCESS_KEY_ID'),
+        secretAccessKey: config.getOrThrow('SECRET_ACCESS_KEY'),
       },
-      region: 'local',
-      endpoint: process.env.ENDPOINT_URL,
+      region: config.getOrThrow('REGION'),
+      endpoint: config.getOrThrow('ENDPOINT'),
     });
     dynamoose.aws.ddb.set(ddb);
   }
