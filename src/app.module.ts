@@ -25,7 +25,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 })
 export class AppModule {
   constructor(config: ConfigService) {
-    if (process.env.NODE_ENV === 'development') {
+    if (process.env.NODE_ENV === 'dev') {
       const dynamooseConfig = {
         credentials: {
           accessKeyId: config.getOrThrow('AWS_ACCESS_KEY_ID'),
