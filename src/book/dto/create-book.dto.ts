@@ -1,4 +1,4 @@
-import { IsOptional, IsString, IsNumber } from 'class-validator';
+import { IsString, IsNumber } from 'class-validator';
 
 export class CreateBookDto {
   @IsString()
@@ -10,4 +10,3 @@ export class CreateBookDto {
   @IsNumber()
   publicationYear: number;
 }
-
