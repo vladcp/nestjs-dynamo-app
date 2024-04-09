@@ -3,7 +3,6 @@ import { UserService } from './user.service';
 import { UserController } from './user.controller';
 import { DynamooseModule } from 'nestjs-dynamoose';
 import { UserSchema } from './entities/user.schema';
-import { CognitoUserPool } from 'amazon-cognito-identity-js';
 
 @Module({
   imports: [
@@ -18,6 +17,6 @@ import { CognitoUserPool } from 'amazon-cognito-identity-js';
     ]),
   ],
   controllers: [UserController],
-  providers: [UserService, CognitoUserPool],
+  providers: [UserService],
 })
 export class UserModule {}

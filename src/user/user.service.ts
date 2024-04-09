@@ -12,18 +12,20 @@ import { ConfigService } from '@nestjs/config';
 import { SignUpUserDto } from './dto/user-sign-up.to';
 import { SignInUserDto } from './dto/user-sign-in.dto';
 import { VerifyUserDto } from './dto/verify-user.dto';
+import { CognitoIdentityProviderClient } from '@aws-sdk/client-cognito-identity-provider';
+
 
 @Injectable()
 export class UserService {
+  private userPool: CognitoUserPool;
+  private providerClient: CognitoIdentityProviderClient;
   constructor(
     @InjectModel('User')
     private userModel: Model<User, UserKey>,
-    private userPool: CognitoUserPool,
-    private config: ConfigService,
   ) {
     this.userPool = new CognitoUserPool({
-      UserPoolId: 'fdsafdasfdsa',
-      ClientId: '3fdsafdsasfd21',
+      UserPoolId: 'eu-west-2_38UQLdTox',
+      ClientId: '4spgfj7j1kpdgiipvfusd879it',
     });
   }
   async signUp(body: SignUpUserDto) {

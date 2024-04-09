@@ -25,10 +25,10 @@ export class AppModule {
   constructor(config: ConfigService) {
     const ddb = new dynamoose.aws.ddb.DynamoDB({
       credentials: {
-        accessKeyId: config.getOrThrow('ACCESS_KEY_ID'),
-        secretAccessKey: config.getOrThrow('SECRET_ACCESS_KEY'),
+        accessKeyId: config.getOrThrow('AWS_ACCESS_KEY_ID'),
+        secretAccessKey: config.getOrThrow('AWS_SECRET_ACCESS_KEY'),
       },
-      region: config.getOrThrow('REGION'),
+      region: config.getOrThrow('AWS_REGION'),
       endpoint: config.getOrThrow('ENDPOINT'),
     });
     dynamoose.aws.ddb.set(ddb);
