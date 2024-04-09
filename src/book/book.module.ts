@@ -11,8 +11,10 @@ import { BookSchema } from './entities/book.schema';
         name: 'Book',
         schema: BookSchema,
         options: {
-          tableName: 'book',
+          create: process.env.NODE_ENV === 'dev',
+          tableName: process.env.TABLE_NAME
         },
+        
       },
     ]),
   ],

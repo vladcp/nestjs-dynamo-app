@@ -10,6 +10,7 @@ services:
     environment:
       - ENDPOINT_URL=http://dynamodb-local:8000
       - NODE_ENV=development
+      - TABLE_NAME=book
     depends_on:
       - dynamodb-local
     networks:

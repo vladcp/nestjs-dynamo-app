@@ -10,6 +10,10 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
   imports: [
     DynamooseModule.forRoot({
       logger: true,
+      table: {
+        create: process.env.NODE_ENV === 'dev',
+        waitForActive: process.env.NODE_ENV === 'dev'
+      }
     }),
     ConfigModule.forRoot({
       isGlobal: true,
