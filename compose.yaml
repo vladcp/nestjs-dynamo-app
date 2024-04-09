@@ -9,6 +9,7 @@ services:
       - '3000:3000'
     environment:
       - ENDPOINT_URL=http://dynamodb-local:8000
+      - NODE_ENV=development
     depends_on:
       - dynamodb-local
     networks:
