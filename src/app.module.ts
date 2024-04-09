@@ -5,6 +5,7 @@ import { BookModule } from './book/book.module';
 import { DynamooseModule } from 'nestjs-dynamoose';
 import * as dynamoose from 'dynamoose';
 import { ConfigModule, ConfigService } from '@nestjs/config';
+import { UserModule } from './user/user.module';
 
 @Module({
   imports: [
@@ -15,6 +16,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
       isGlobal: true,
     }),
     BookModule,
+    UserModule,
   ],
   controllers: [AppController],
   providers: [AppService],
