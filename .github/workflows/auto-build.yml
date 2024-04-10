@@ -3,7 +3,7 @@ name: Build and publish NestJS Docker image
 on:
   workflow_dispatch:
   push:
-    branches: [main, beta, github-actions]
+    branches: [main, beta]
 
 jobs:
   release:
