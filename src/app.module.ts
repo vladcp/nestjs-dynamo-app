@@ -10,6 +10,10 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
   imports: [
     DynamooseModule.forRoot({
       logger: true,
+      table: {
+        create: process.env.NODE_ENV === 'dev',
+        waitForActive: process.env.NODE_ENV === 'dev'
+      }
     }),
     ConfigModule.forRoot({
       isGlobal: true,
@@ -21,14 +25,18 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 })
 export class AppModule {
   constructor(config: ConfigService) {
-    const ddb = new dynamoose.aws.ddb.DynamoDB({
-      credentials: {
-        accessKeyId: config.getOrThrow('ACCESS_KEY_ID'),
-        secretAccessKey: config.getOrThrow('SECRET_ACCESS_KEY'),
-      },
-      region: config.getOrThrow('REGION'),
-      endpoint: config.getOrThrow('ENDPOINT'),
-    });
-    dynamoose.aws.ddb.set(ddb);
+    if (process.env.NODE_ENV === 'dev') {
+      const dynamooseConfig = {
+        credentials: {
+          accessKeyId: config.getOrThrow('AWS_ACCESS_KEY_ID'),
+          secretAccessKey: config.getOrThrow('AWS_SECRET_ACCESS_KEY'),
+        },
+        region: config.getOrThrow('AWS_REGION'),
+      } 
+      const ddb = new dynamoose.aws.ddb.DynamoDB(dynamooseConfig)
+      dynamoose.aws.ddb.set(ddb);
+      dynamoose.aws.ddb.local(config.get('ENDPOINT_URL'))
+    }
+    
   }
 }
