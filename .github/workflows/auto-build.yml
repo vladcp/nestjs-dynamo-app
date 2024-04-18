@@ -31,6 +31,7 @@ jobs:
           context: .
           push: true
           tags: vladcp/nestjs-app
+          
       - name: Semantic release
         uses: cycjimmy/semantic-release-action@v4
         env:
