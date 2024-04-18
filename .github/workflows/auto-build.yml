@@ -26,5 +26,9 @@ jobs:
           context: .
           push: true
           tags: vladcp/nestjs-app
-        
+      
+      - name: Semantic Release 
+        uses: cycjimmy/semantic-release-action@v4
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
