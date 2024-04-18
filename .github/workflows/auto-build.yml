@@ -19,9 +19,6 @@ jobs:
         with:
           node-version: 20.x
       
-      - name: Install semantic-release extra plugins
-        run: mv package.json package.json.bak && npm install --no-save @semantic-release/changelog @semantic-release-plus/docker && mv package.json.bak package.json
-      
       - name: Log in to Docker Hub
         uses: docker/login-action@v3
         with:
@@ -34,8 +31,12 @@ jobs:
           context: .
           push: true
           tags: vladcp/nestjs-app
-      - name: Release
+      - name: Semantic release
+        uses: cycjimmy/semantic-release-action@v4
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: npx semantic-release
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} 
+      # - name: Release
+      #   env:
+      #     GITHUB_TOKEN: secrets.GITHUB_TOKEN }}
+      #   run: npx semantic-release
         
